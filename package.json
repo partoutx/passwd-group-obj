@@ -1,0 +1,23 @@
+{
+  "name": "passwd-group-obj",
+  "version": "0.1.0",
+  "description": "Passwd and Group as object with management methods",
+  "license": "MIT",
+  "author": {
+    "name": "Graham Bevan",
+    "email": "graham.bevan@ntlworld.com"
+  },
+  "dependencies": {
+    "lodash": "^4.15.0",
+    "q": "^1.4.1",
+    "tmp": "0.0.28"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-batch": "^1.0.5",
+    "gulp-filter": "^4.0.0",
+    "gulp-mocha": "^3.0.1",
+    "gulp-watch": "^4.3.9",
+    "should": "^11.1.0"
+  }
+}
