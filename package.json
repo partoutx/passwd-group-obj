@@ -1,7 +1,7 @@
 {
   "name": "passwd-group-obj",
   "version": "0.1.0",
-  "description": "Passwd and Group as object with management methods",
+  "description": "Passwd and Group as nodejs objects with management methods",
   "license": "MIT",
   "author": {
     "name": "Graham Bevan",
