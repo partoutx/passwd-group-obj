@@ -1,11 +1,15 @@
 {
   "name": "passwd-group-obj",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Passwd and Group as nodejs objects with management methods",
   "license": "MIT",
   "author": {
     "name": "Graham Bevan",
     "email": "graham.bevan@ntlworld.com"
+  },
+  "repository": {
+    "url": "https://github.com/partoutx/passwd-group-obj.git",
+    "type": "git"
   },
   "dependencies": {
     "lodash": "^4.15.0",
