@@ -65,6 +65,11 @@ describe('Passwd', function () {
     passwd.$deleteUser.should.be.a.Function();
   });
 
+  it('should have method $cleansed()', function () {
+    should(passwd.$cleansed).not.be.undefined();
+    passwd.$cleansed.should.be.a.Function();
+  });
+
   describe('$addUser method', function () {
     it('should throw error if no PUser parameter is passwd', function () {
       should.throws(function () {
@@ -102,6 +107,16 @@ describe('Passwd', function () {
         .done();
       });
     }
+  });
+
+  describe('$cleansed method', function () {
+    it('should return a cleansed hash', function () {
+      var hash = passwd.$cleansed();
+      should(hash).not.be.undefined();
+
+      should(hash.root).not.be.undefined();
+      hash.root.should.not.be.an.instanceof(PUser);
+    });
   });
 
   describe('PUser', function () {

@@ -65,6 +65,11 @@ describe('Group', function () {
     group.$deleteGroup.should.be.a.Function();
   });
 
+  it('should have method $cleansed()', function () {
+    should(group.$cleansed).not.be.undefined();
+    group.$cleansed.should.be.a.Function();
+  });
+
   describe('$addGroup method', function () {
     it('should throw error if no GGroup parameter is group', function () {
       should.throws(function () {
@@ -74,6 +79,7 @@ describe('Group', function () {
 
     if (isAdmin()) {
       it('should add new groups foog, foog2', function (done) {
+        this.timeout(4000);
         var foog = new GGroup({
           name: 'foog',
           gid: 32000,
@@ -94,6 +100,16 @@ describe('Group', function () {
         .done();
       });
     }
+  });
+
+  describe('$cleansed method', function () {
+    it('should return a cleansed hash', function () {
+      var hash = group.$cleansed();
+      should(hash).not.be.undefined();
+
+      should(hash.root).not.be.undefined();
+      hash.root.should.not.be.an.instanceof(GGroup);
+    });
   });
 
   describe('GGroup', function () {
