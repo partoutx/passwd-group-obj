@@ -2,7 +2,7 @@
 
 Password and group maintenance library using promises.
 
-(part of the [Partout](https://github.com/gbevan/partout) project).
+(part of the [Partout](https://github.com/partoutx/partout) project).
 
 ## passwd
 
