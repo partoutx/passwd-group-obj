@@ -6,7 +6,8 @@ var path = require('path'),
     group = require('../').group,
     GGroup = require('../').GGroup,
     isAdmin = group.isAdmin,
-    Q = require('q');
+    Q = require('q'),
+    _ = require('lodash');
 
 global.should = require('should');
 should.extend();
@@ -190,6 +191,21 @@ describe('Group', function () {
         group.foog.$set('user_list', ['root', 'nobody'])
         .then(function () {
           group.foog.$get('user_list').should.eql(['root', 'nobody']);
+          done();
+        })
+        .done(null, function (err) {
+          done(err);
+        });
+      });
+
+      it('should allow setting from a GGroup object', function (done) {
+        var u_ggroup = _.cloneDeep(group.foog);
+        u_ggroup.user_list = ['bin', 'adm'];
+        u_ggroup.gid = 33000;
+        group.foog.$set(u_ggroup)
+        .then(function () {
+          group.foog.$get('user_list').should.eql(['bin', 'adm']);
+          //group.foog.$get('gid').should.eql(33000);
           done();
         })
         .done(null, function (err) {

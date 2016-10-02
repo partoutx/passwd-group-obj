@@ -1,6 +1,6 @@
 {
   "name": "passwd-group-obj",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Passwd and Group as nodejs objects with management methods",
   "license": "MIT",
   "author": {
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "lodash": "^4.15.0",
+    "nimble": "0.0.2",
     "q": "^1.4.1",
     "tmp": "0.0.28"
   },

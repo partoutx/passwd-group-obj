@@ -6,7 +6,8 @@ var path = require('path'),
     passwd = require('../').passwd,
     PUser = require('../').PUser,
     isAdmin = passwd.isAdmin,
-    Q = require('q');
+    Q = require('q'),
+    _ = require('lodash');
 
 global.should = require('should');
 should.extend();
@@ -310,6 +311,21 @@ describe('Passwd', function () {
           passwd.foo.$set('sexpire', '6666')
           .then(function () {
             passwd.foo.$get('sexpire').should.eql(6666);
+            done();
+          })
+          .done(null, function (err) {
+            done(err);
+          });
+        });
+
+        it('should allow setting from a PUser object', function (done) {
+          var u_puser = _.cloneDeep(passwd.foo);
+          u_puser.gecos = 'CLONED';
+          u_puser.sexpire = 7777;
+          passwd.foo.$set(u_puser)
+          .then(function () {
+            passwd.foo.$get('gecos').should.eql('CLONED');
+            passwd.foo.$get('sexpire').should.eql(7777);
             done();
           })
           .done(null, function (err) {
