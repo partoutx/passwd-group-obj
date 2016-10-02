@@ -205,7 +205,7 @@ describe('Group', function () {
         group.foog.$set(u_ggroup)
         .then(function () {
           group.foog.$get('user_list').should.eql(['bin', 'adm']);
-          //group.foog.$get('gid').should.eql(33000);
+          group.foog.$get('gid').should.eql(33000);
           done();
         })
         .done(null, function (err) {
