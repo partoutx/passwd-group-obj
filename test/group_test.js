@@ -200,11 +200,11 @@ describe('Group', function () {
 
       it('should allow setting from a GGroup object', function (done) {
         var u_ggroup = _.cloneDeep(group.foog);
-        u_ggroup.user_list = ['bin', 'adm'];
+        u_ggroup.user_list = ['bin', 'lp'];
         u_ggroup.gid = 33000;
         group.foog.$set(u_ggroup)
         .then(function () {
-          group.foog.$get('user_list').should.eql(['bin', 'adm']);
+          group.foog.$get('user_list').should.eql(['bin', 'lp']);
           group.foog.$get('gid').should.eql(33000);
           done();
         })
