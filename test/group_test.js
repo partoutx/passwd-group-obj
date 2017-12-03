@@ -89,7 +89,8 @@ describe('Group', function () {
         var foog2 = new GGroup({
           name: 'foog2',
           gid: 32001,
-          user_list: ['root', 'nobody']
+          user_list: ['root', 'nobody'],
+          system: true
         });
         group.$addGroup(foog)
         .then(function () {
@@ -141,11 +142,13 @@ describe('Group', function () {
       });
     });
 
-    describe('$get', function () {
-      it('should get correct user_list', function () {
-        group.foog.$get('user_list').should.eql(['root', 'nobody']);
+    if (isAdmin()) {
+      describe('$get', function () {
+        it('should get correct user_list', function () {
+          group.foog.$get('user_list').should.eql(['root', 'nobody']);
+        });
       });
-    });
+    }
 
     describe('$set (nonprivileged)', function () {
       if (isAdmin()) {
@@ -169,6 +172,13 @@ describe('Group', function () {
       });
 
       describe('group foog', function () {
+        it('should have gid that is numeric', function () {
+          should(group.foog.gid).not.be.undefined();
+          group.foog.gid.should.be.a.Number();
+        });
+      });
+
+      describe('group foog2', function () {
         it('should have gid that is numeric', function () {
           should(group.foog.gid).not.be.undefined();
           group.foog.gid.should.be.a.Number();
@@ -220,32 +230,34 @@ describe('Group', function () {
 }); // Group
 
 describe('Group', function () {
-  describe('$deleteGroup', function () {
+  if (isAdmin()) {
+    describe('$deleteGroup', function () {
 
-    it('should delete group foog using $deleteGroup()', function (done) {
-      should(group.foog).not.be.undefined();
-      group.foog.should.be.an.instanceof(GGroup);
-      group.$deleteGroup('foog')
-      .then(function () {
-        should(group.foog).be.undefined();
-        done();
-      })
-      .done(null, function (err) {
-        done(err);
+      it('should delete group foog using $deleteGroup()', function (done) {
+        should(group.foog).not.be.undefined();
+        group.foog.should.be.an.instanceof(GGroup);
+        group.$deleteGroup('foog')
+        .then(function () {
+          should(group.foog).be.undefined();
+          done();
+        })
+        .done(null, function (err) {
+          done(err);
+        });
+      });
+
+      it('should delete group foog2 using $delete()', function (done) {
+        should(group.foog2).not.be.undefined();
+        group.foog2.should.be.an.instanceof(GGroup);
+        group.foog2.$delete()
+        .then(function () {
+          should(group.foog2).be.undefined();
+          done();
+        })
+        .done(null, function (err) {
+          done(err);
+        });
       });
     });
-
-    it('should delete group foog2 using $delete()', function (done) {
-      should(group.foog2).not.be.undefined();
-      group.foog2.should.be.an.instanceof(GGroup);
-      group.foog2.$delete()
-      .then(function () {
-        should(group.foog2).be.undefined();
-        done();
-      })
-      .done(null, function (err) {
-        done(err);
-      });
-    });
-  });
+  }
 });

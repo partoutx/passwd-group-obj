@@ -342,32 +342,34 @@ describe('Passwd', function () {
 });
 
 describe('Passwd', function () {
-  describe('$deleteUser', function () {
+  if (isAdmin()) {
+    describe('$deleteUser', function () {
 
-    it('should delete user foo using $deleteUser()', function (done) {
-      should(passwd.foo).not.be.undefined();
-      passwd.foo.should.be.an.instanceof(PUser);
-      passwd.$deleteUser('foo')
-      .then(function () {
-        should(passwd.foo).be.undefined();
-        done();
-      })
-      .done(null, function (err) {
-        done(err);
+      it('should delete user foo using $deleteUser()', function (done) {
+        should(passwd.foo).not.be.undefined();
+        passwd.foo.should.be.an.instanceof(PUser);
+        passwd.$deleteUser('foo')
+        .then(function () {
+          should(passwd.foo).be.undefined();
+          done();
+        })
+        .done(null, function (err) {
+          done(err);
+        });
+      });
+
+      it('should delete user foo2 using $delete()', function (done) {
+        should(passwd.foo2).not.be.undefined();
+        passwd.foo2.should.be.an.instanceof(PUser);
+        passwd.foo2.$delete()
+        .then(function () {
+          should(passwd.foo2).be.undefined();
+          done();
+        })
+        .done(null, function (err) {
+          done(err);
+        });
       });
     });
-
-    it('should delete user foo2 using $delete()', function (done) {
-      should(passwd.foo2).not.be.undefined();
-      passwd.foo2.should.be.an.instanceof(PUser);
-      passwd.foo2.$delete()
-      .then(function () {
-        should(passwd.foo2).be.undefined();
-        done();
-      })
-      .done(null, function (err) {
-        done(err);
-      });
-    });
-  });
+  }
 });
