@@ -96,7 +96,8 @@ describe('Passwd', function () {
           gecos: 'Foo User #2',
           dir: '/home/foo2',
           shell: '/bin/bash',
-          spw: '$6$garbage'
+          spw: '$6$garbage',
+          system: true
         });
         passwd.$addUser(foo)
         .then(function () {
